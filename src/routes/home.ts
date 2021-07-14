@@ -2,9 +2,7 @@ import express, {Request, Response, Router} from 'express';
 import fs from 'fs';
 import {keys} from '../keys';
 
-
 const homeRouter: Router = express.Router();
-
 
 homeRouter.get('/', (req: Request, res: Response) => {
   fs.readFile(keys.PATH, keys.ENCODING, (e, data) => {
@@ -16,7 +14,6 @@ homeRouter.get('/', (req: Request, res: Response) => {
   });
 });
 
-
 homeRouter.post('/', (req: Request, res: Response) => {
   const data: string = req.body.data + '\n';
   fs.writeFile(keys.PATH, data, keys.ENCODING, (e) => {
@@ -27,7 +24,6 @@ homeRouter.post('/', (req: Request, res: Response) => {
     res.sendStatus(200);
   });
 });
-
 
 homeRouter.patch('/', (req: Request, res: Response) => {
   const data: string = req.body.data + '\n';
@@ -43,7 +39,6 @@ homeRouter.patch('/', (req: Request, res: Response) => {
   });
 });
 
-
 homeRouter.delete('/', (req: Request, res: Response) => {
   fs.unlink(keys.PATH, (e) => {
     if (e) {
@@ -53,6 +48,5 @@ homeRouter.delete('/', (req: Request, res: Response) => {
     res.sendStatus(200);
   });
 });
-
 
 export default homeRouter;
